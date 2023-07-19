@@ -29,7 +29,6 @@
     "eqeqeq": "error",
     "no-nested-ternary": "error",
     "prefer-const": "error",
-    "sort-keys": "error",
     "react/self-closing-comp": "error",
     "no-useless-return": "error",
     "simple-import-sort/imports": [
