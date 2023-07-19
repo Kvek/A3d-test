@@ -18,6 +18,7 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["simple-import-sort", "react", "@typescript-eslint"],
   "rules": {
+    "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-explicit-any": "error",
     "promise/prefer-await-to-then": "error",
     "no-unused-vars": "off",
@@ -47,5 +48,10 @@
       }
     ]
   },
-  "root": true
+  "root": true,
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }

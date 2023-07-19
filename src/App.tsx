@@ -1,31 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import { CharactersList } from './CharactersList/CharactersList';
-import axios from 'axios';
+import { useEffect, useState } from "react";
 
+import { CharactersList } from "./CharactersList/CharactersList";
+
+import "./App.css";
+import axios from "axios";
 
 function App() {
+  const [query, setQuery] = useState("");
   const [items, setItems] = useState([]);
   const [apiResult, setApiResult] = useState([]);
 
   useEffect(() => {
-    axios.get('https://rickandmortyapi.com/api/character')
-    .then((res) => setApiResult); 
-  },[]);
+    (async () => {
+      try {
+        const res = await axios.get(
+          "https://rickandmortyapi.com/api/character"
+        );
+        setApiResult(res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
 
-  const [query, setQuery] = useState('');
-	useEffect(() => {
-		setItems(
-			apiResult.filter(
-				(item) => {
-					return  Object.keys(item)
-					.some((key) => {
-						return (item[key] as string).toUpperCase.includes(query.toUpperCase());
-					})
-				}
-			)
-		);
-	},[query, apiResult]);
+  useEffect(() => {
+    if (!apiResult) return;
+
+    setItems(
+      apiResult.filter((item) =>
+        Object.keys(item).some((key) =>
+          (item[key] as string).toUpperCase.includes(query.toUpperCase())
+        )
+      )
+    );
+  }, [query, apiResult]);
 
   return (
     <div className="App">
