@@ -2,7 +2,10 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   overflow: auto;
+  margin: 25px;
   position: relative;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 `;
 
 export const TableContainer = styled.table`
@@ -14,7 +17,6 @@ export const TableContainer = styled.table`
 `;
 
 export const TRow = styled.tr`
-  border-bottom: 1px solid #f2f6fc;
   width: 100%;
 `;
 
@@ -28,7 +30,7 @@ export const THead = styled.thead`
 
 export const THeadCell = styled.th`
   font-family: Inter, Arial, sans-serif;
-  height: 30px;
+  height: 45px;
   min-width: 100px;
   position: sticky;
   top: 0;
@@ -55,7 +57,7 @@ export const TBodyCell = styled.td`
 export const PaginationContainer = styled.div`
   position: sticky;
   bottom: 0;
-  height: 40px;
+  height: 45px;
   background-color: #f2f6fc;
   color: #6b778c;
   font-size: 16px;
