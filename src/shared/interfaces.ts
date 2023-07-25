@@ -20,7 +20,7 @@ export interface Endpoints {
   episode: string;
 }
 
-export interface CharacterFilter {
+export interface CharactersFilterParams {
   name?: string;
   type?: string;
   species?: string;
@@ -29,16 +29,13 @@ export interface CharacterFilter {
   page?: number;
 }
 
-export interface LocationFilter
-  extends Pick<CharacterFilter, "name" | "type" | "page"> {
+export interface LocationFilterParams
+  extends Pick<CharactersFilterParams, "name" | "type" | "page"> {
   dimension?: string;
 }
 
-export interface EpisodeFilter extends Pick<CharacterFilter, "name" | "page"> {
-  /**
-   * Filter by the given episode code.
-   * i.e: `{ episode: "S01E01" }`
-   */
+export interface EpisodeFilterParams
+  extends Pick<CharactersFilterParams, "name" | "page"> {
   episode?: string;
 }
 
@@ -66,26 +63,16 @@ export interface Episode extends ResourceBase {
 }
 
 export interface ApiResponse<T> {
-  /** The HTTP status code from the API response */
   status: number;
-  /** The HTTP status message from the API response */
   statusMessage: string;
-  /** The response that was provided by the API */
   data: T;
 }
 
 export interface Info<T> {
-  /**
-   * The API will automatically paginate the responses. You will receive up to `20` documents per page.
-   */
   info?: {
-    /** The length of the response */
     count: number;
-    /** The amount of pages */
     pages: number;
-    /** Link to the next page (if it exists) */
     next: string | null;
-    /** Link to the previous page (if it exists) */
     prev: string | null;
   };
   results: Array<T>;
@@ -96,20 +83,3 @@ export type CharacterListApiResponse = Info<Character>;
 export type LocationListApiResponse = Info<Location>;
 
 export type EpisodeListApiResponse = Info<Episode>;
-
-export interface CharactersFilterParams {
-  name?: string;
-  status?: Status;
-  species?: string;
-  type?: string;
-  gender?: Gender;
-}
-export interface LocationFilterParams {
-  name?: string;
-  type?: string;
-  dimension?: string;
-}
-export interface EpisodeFilterParams {
-  name?: string;
-  episode?: string;
-}

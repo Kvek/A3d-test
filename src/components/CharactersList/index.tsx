@@ -1,4 +1,6 @@
-import { SearchBox } from "../SearchBox/SearchBox";
+
+
+import { SearchBox } from "../SearchBox";
 import {
   List,
   ListCol,
@@ -6,6 +8,7 @@ import {
   ListItem,
   NoResults,
 } from "./CharactersList.styles";
+
 
 interface Item {
   name: string;

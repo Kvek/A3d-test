@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { getCharacterList } from "./Api/endpoints";
-import { Character } from "./Api/interfaces";
-import { CharactersList } from "./CharactersList/CharactersList";
+import { CharactersList } from "./components";
+import { getCharacterList } from "./shared/api";
+import { Character } from "./shared/interfaces";
 
 import "./App.css";
 

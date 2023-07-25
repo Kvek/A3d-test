@@ -29,7 +29,6 @@ const getMutlipleResources = (
 /**
  * Character endpoints
  **/
-
 export const getCharacter = (id: number) => getSingleResource(CHARACTER, id);
 
 export const getCharacterList = () =>
