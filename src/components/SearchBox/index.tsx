@@ -1,4 +1,5 @@
-import { Container, SearchInput } from "./SearchBox.styles";
+import { Search } from "../Icons";
+import { Container, SearchContainer, SearchInput } from "./SearchBox.styles";
 
 interface SearchProps {
   query: string;
@@ -14,7 +15,10 @@ export const SearchBox = ({ query, setQuery, children }: SearchProps) => {
   return (
     <Container>
       {children}
-      <SearchInput value={query} onChange={onChange} />
+      <SearchContainer>
+        <SearchInput value={query} onChange={onChange} />
+        <Search />
+      </SearchContainer>
     </Container>
   );
 };

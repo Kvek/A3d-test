@@ -1,10 +1,9 @@
 import { ReactNode } from "react";
 
-import { ChevronFinal, ChevronNext } from "../Logos";
+import { TabType } from "../../store/reducers/tabsSlice";
 import {
-  Container,
-  PaginationContainer,
   TableContainer,
+  TableWrapper,
   TBody,
   TBodyCell,
   THead,
@@ -15,6 +14,7 @@ import {
 type TableProps = {
   headerContent: ReactNode;
   bodyContent: ReactNode;
+  tabs?: TabType[];
 };
 
 export interface CellInterface
@@ -35,7 +35,7 @@ export const TableRow = ({ rowContent }: { rowContent: ReactNode }) => (
 );
 
 export const Table = ({ headerContent, bodyContent }: TableProps) => (
-  <Container>
+  <TableWrapper>
     <TableContainer>
       <THead>
         <TableRow rowContent={headerContent} />
@@ -43,21 +43,5 @@ export const Table = ({ headerContent, bodyContent }: TableProps) => (
 
       <TBody>{bodyContent}</TBody>
     </TableContainer>
-
-    <PaginationContainer>
-      <span>
-        <label htmlFor="Rows"> Rows per page:</label>
-        <select id="Rows" />
-      </span>
-
-      <span />
-
-      <span>
-        <ChevronFinal flip />
-        <ChevronNext flip />
-        <ChevronNext />
-        <ChevronFinal />
-      </span>
-    </PaginationContainer>
-  </Container>
+  </TableWrapper>
 );

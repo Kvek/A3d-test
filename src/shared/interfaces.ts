@@ -68,13 +68,15 @@ export interface ApiResponse<T> {
   data: T;
 }
 
+export type ListInfoType = {
+  count: number;
+  pages: number;
+  next: string | null;
+  prev: string | null;
+};
+
 export interface Info<T> {
-  info?: {
-    count: number;
-    pages: number;
-    next: string | null;
-    prev: string | null;
-  };
+  info: ListInfoType;
   results: Array<T>;
 }
 

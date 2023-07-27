@@ -10,9 +10,9 @@ import {
 import axios from "axios";
 
 const BASE_URL = "https://rickandmortyapi.com/api";
-const CHARACTER = "character";
-const LOCATION = "location";
-const EPISODE = "episode";
+export const CHARACTER = "character";
+export const LOCATION = "location";
+export const EPISODE = "episode";
 
 axios.defaults.baseURL = BASE_URL;
 
@@ -31,8 +31,8 @@ const getMutlipleResources = (
  **/
 export const getCharacter = (id: number) => getSingleResource(CHARACTER, id);
 
-export const getCharacterList = () =>
-  axios.get<CharacterListApiResponse>(`/${CHARACTER}`);
+export const getCharacterList = (page?: number) =>
+  axios.get<CharacterListApiResponse>(`/${CHARACTER}?page=${page}`);
 
 export const getMultiCharacters = (ids: Array<number>) =>
   getMutlipleResources(CHARACTER, ids);
@@ -54,8 +54,8 @@ export const getFilteredCharactersList = ({
  **/
 export const getLocation = (id: number) => getSingleResource(LOCATION, id);
 
-export const getLocationList = () =>
-  axios.get<LocationListApiResponse>(`/${LOCATION}`);
+export const getLocationList = (page?: number) =>
+  axios.get<LocationListApiResponse>(`/${LOCATION}?page=${page}`);
 
 export const getMultiLocations = (ids: Array<number>) =>
   getMutlipleResources(LOCATION, ids);
@@ -75,8 +75,8 @@ export const getFilteredLocationsList = ({
  **/
 export const getEpisode = (id: number) => getSingleResource(EPISODE, id);
 
-export const getEpisodesList = () =>
-  axios.get<EpisodeListApiResponse>(`/${EPISODE}`);
+export const getEpisodesList = (page?: number) =>
+  axios.get<EpisodeListApiResponse>(`/${EPISODE}?page=${page}`);
 
 export const getMultiEpisodes = (ids: Array<number>) =>
   getMutlipleResources(EPISODE, ids);

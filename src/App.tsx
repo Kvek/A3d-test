@@ -1,37 +1,60 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { CharactersList } from "./components";
-import { getCharacterList } from "./shared/api";
-import { Character } from "./shared/interfaces";
+import { EpisodeList } from "./components/EpisodeList";
+import { LocationList } from "./components/LocationList";
+import {
+  CHARACTER,
+  EPISODE,
+  getCharacterList,
+  getEpisodesList,
+  getLocationList,
+  LOCATION,
+} from "./shared/api";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { updateCharacterListData } from "./store/reducers/characterSlice";
+import { updateEpisodeListData } from "./store/reducers/episodeSlice";
+import { updateLocationListData } from "./store/reducers/locationSlice";
+import { updateCurrentTab } from "./store/reducers/tabsSlice";
 
 import "./App.css";
 
 function App() {
-  const [query, setQuery] = useState("");
-  const [items, setItems] = useState<Character[]>([]);
-  const [apiResult, setApiResult] = useState<Character[]>([]);
+  const currentTab = useAppSelector(({ tabs: { currentTab } }) => currentTab);
+  const dispatch = useAppDispatch();
+
+  const getData = async () => {
+    try {
+      if (currentTab === CHARACTER) {
+        const data = (await getCharacterList()).data;
+
+        dispatch(updateCharacterListData(data));
+      } else if (currentTab === LOCATION) {
+        const data = (await getLocationList()).data;
+
+        dispatch(updateLocationListData(data));
+      } else if (currentTab === EPISODE) {
+        const data = (await getEpisodesList()).data;
+        dispatch(updateEpisodeListData(data));
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await getCharacterList();
-
-        setApiResult(res.data.results);
-      } catch (error) {
-        console.error(error);
-      }
-    })();
+    dispatch(updateCurrentTab("character"));
   }, []);
 
   useEffect(() => {
-    if (!apiResult) return;
-
-    setItems(apiResult);
-  }, [query, apiResult]);
+    getData();
+  }, [currentTab]);
 
   return (
     <div className="App">
-      <CharactersList items={items} onQueryChange={setQuery} query={query} />
+      {currentTab === "character" && <CharactersList />}
+      {currentTab === "location" && <LocationList />}
+      {currentTab === "episode" && <EpisodeList />}
     </div>
   );
 }
